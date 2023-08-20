@@ -10,7 +10,7 @@ Tag.init(
       type: DataTypes.INTEGER,
       primaryKey: true,
       references: {
-        mode: "category",
+        model: "category",
         key: "id",
       },
       tag_name: {

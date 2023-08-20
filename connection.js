@@ -3,11 +3,9 @@ const Sequelize = require("sequelize");
 // Create a connection object
 const sequelize = new Sequelize(
   // Database name
-  "ecommerce_db",
-  // User
-  "root",
-  // Password
-  "myPassword",
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
   {
     // Database location
     host: "localhost",

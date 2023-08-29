@@ -9,13 +9,11 @@ Tag.init(
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      references: {
-        model: "category",
-        key: "id",
-      },
-      tag_name: {
-        type: DataTypes.STRING,
-      },
+      autoIncrement: true,
+      allowNull: false,
+    },
+    tag_name: {
+      type: DataTypes.STRING,
     },
   },
   {

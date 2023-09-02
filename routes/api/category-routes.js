@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
     // Create a new category in the database
     const createdCategory = await Category.create(newCategory);
 
-    res.status(201).json(createdCategory); // Respond with the created category
+    res.status(200).json(createdCategory); // Respond with the created category
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
@@ -82,17 +82,19 @@ router.put("/:id", async (req, res) => {
 // Delete a category by its `id` value
 router.delete("/:id", async (req, res) => {
   try {
-    const deletedCategory = await Category.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
+    const categoryId = req.params.id; // Get the category's id from the URL parameter
 
-    if (!deletedCategory) {
-      res.status(404).json({ message: "Category not found" });
-    } else {
-      res.status(200).json({ message: "Category deleted successfully" });
+    // Find the category by id
+    const category = await Category.findByPk(categoryId);
+
+    if (category === null) {
+      return res.status(404).json({ error: "category not found" });
     }
+
+    // Delete the category
+    await category.destroy();
+
+    res.status(200).json({ message: "Category deleted successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

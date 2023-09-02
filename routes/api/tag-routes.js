@@ -100,7 +100,7 @@ router.delete("/:id", async (req, res) => {
     // Find the tag by id
     const tag = await Tag.findByPk(tagId);
 
-    if (!tag) {
+    if (tag === null) {
       return res.status(404).json({ error: "Tag not found" });
     }
 
@@ -108,7 +108,7 @@ router.delete("/:id", async (req, res) => {
     await tag.destroy();
 
     // Send a success message as the response
-    res.status(204).send();
+    res.status(200).send();
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to delete the tag" });

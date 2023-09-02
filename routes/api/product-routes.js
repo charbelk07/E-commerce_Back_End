@@ -10,13 +10,9 @@ router.get("/", (req, res) => {
     res.json(productData);
   });
 });
-// be sure to include its associated Category and Tag data
 
-// get one product
-// Get one product
+// get one product by its id and includes its associated Category and Tag data
 router.get("/:id", (req, res) => {
-  // find a single product by its id
-  // be sure to include its associated Category and Tag data
   Product.findOne({
     where: {
       id: req.params.id,
